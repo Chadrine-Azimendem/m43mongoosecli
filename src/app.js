@@ -1,7 +1,7 @@
 require("./db/connection");
 const yargs = require("yargs"); //import yargs for the cli
 const mongoose = require("mongoose");
-const { createMovie, readMovies } = require("./movies/function");
+const { createMovie, readMovies, update } = require("./movies/function");
 
 const app = async (yargsinput) => {
   if (yargsinput.create) {
@@ -17,6 +17,7 @@ const app = async (yargsinput) => {
     await readMovies(yargsinput);
   } else if (yargsinput.update) {
     // put update code here
+    await update(yargsinput);
   } else if (yargsinput.delete) {
     // put delete code here
   } else {

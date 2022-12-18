@@ -9,7 +9,7 @@ const createMovie = async (movieObject) => {
   }
 };
 
-const readMovies = async (movieObject) => {
+const readMovies = async () => {
   try {
     const listOfMovies = await MovieCollection.find({});
     let newobjetsArr = [];
@@ -27,12 +27,41 @@ const readMovies = async (movieObject) => {
   }
 };
 
-// const updateMovie = async () => {
-//   try {
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const update = async (movieObject) => {
+  try {
+    const filter = { title: movieObject.title };
+    if (movieObject.actor) {
+      const actorUpdate = { actor: movieObject.actor };
+
+      let newMovie = await MovieCollection.findOneAndUpdate(
+        filter,
+        actorUpdate,
+        {
+          new: true,
+        }
+      );
+      console.log("Actor updated", newMovie);
+    } else if (movieObject.director) {
+      const update = { director: movieObject.director };
+
+      let newMovie = await MovieCollection.findOneAndUpdate(filter, update, {
+        new: true,
+      });
+      console.log("Director updated", newMovie);
+    } else if (movieObject.rating) {
+      const Update = { rating: movieObject.rating };
+
+      let newMovie = await MovieCollection.findOneAndUpdate(filter, Update, {
+        new: true,
+      });
+      console.log("Rating updated", newMovie);
+    } else {
+      console.log("Nothing updated");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // const deleteMovie = async () => {
 //   try {
@@ -41,4 +70,4 @@ const readMovies = async (movieObject) => {
 //   }
 // };
 
-module.exports = { createMovie, readMovies };
+module.exports = { createMovie, readMovies, update };
