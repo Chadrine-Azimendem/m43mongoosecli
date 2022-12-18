@@ -63,11 +63,18 @@ const update = async (movieObject) => {
   }
 };
 
-// const deleteMovie = async () => {
-//   try {
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const deleteMovie = async (movieObject) => {
+  try {
+    const query = { title: movieObject.title };
+    let result = await MovieCollection.deleteOne(query);
+    if (result.deletedCount === 1) {
+      console.log(`${query.title} deleted successfully`);
+    } else {
+      console.log(`Deletting ${query} not successfull`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-module.exports = { createMovie, readMovies, update };
+module.exports = { createMovie, readMovies, update, deleteMovie };

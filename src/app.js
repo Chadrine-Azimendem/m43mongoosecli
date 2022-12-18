@@ -1,7 +1,12 @@
 require("./db/connection");
 const yargs = require("yargs"); //import yargs for the cli
 const mongoose = require("mongoose");
-const { createMovie, readMovies, update } = require("./movies/function");
+const {
+  createMovie,
+  readMovies,
+  update,
+  deleteMovie,
+} = require("./movies/function");
 
 const app = async (yargsinput) => {
   if (yargsinput.create) {
@@ -13,13 +18,14 @@ const app = async (yargsinput) => {
       rating: yargsinput.rating,
     });
   } else if (yargsinput.read) {
-    // put read code here
+    //read all movies
     await readMovies(yargsinput);
   } else if (yargsinput.update) {
-    // put update code here
+    //update movies by field
     await update(yargsinput);
   } else if (yargsinput.delete) {
     // put delete code here
+    await deleteMovie(yargsinput);
   } else {
     console.log("Unrecognised Command");
   }
