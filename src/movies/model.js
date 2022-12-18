@@ -19,12 +19,13 @@ const movieSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    default: 0,
+    default: 5,
     min: 1,
     max: 5,
   },
 });
 
+// mongoose.set("strictQuery", true);
 // create the collection
 const MovieCollection = mongoose.model("Movies", movieSchema);
 

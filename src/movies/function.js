@@ -9,12 +9,23 @@ const createMovie = async (movieObject) => {
   }
 };
 
-// const readMovie = async () => {
-//   try {
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const readMovies = async (movieObject) => {
+  try {
+    const listOfMovies = await MovieCollection.find({});
+    let newobjetsArr = [];
+    for (let i = 0; i < listOfMovies.length; i++) {
+      newobjetsArr.push({
+        title: listOfMovies[i].title,
+        actor: listOfMovies[i].actor,
+        director: listOfMovies[i].director,
+        rating: listOfMovies[i].rating,
+      });
+    }
+    console.table(newobjetsArr);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // const updateMovie = async () => {
 //   try {
@@ -30,4 +41,4 @@ const createMovie = async (movieObject) => {
 //   }
 // };
 
-module.exports = { createMovie };
+module.exports = { createMovie, readMovies };
